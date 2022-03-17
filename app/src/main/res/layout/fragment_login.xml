@@ -10,14 +10,16 @@
         android:id="@+id/input_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="40dp"
         android:ems="10"
-        android:inputType="text|textPassword|numberDecimal"
+        android:inputType="textPassword"
         android:text="password"
+        app:layout_constraintBottom_toTopOf="@+id/id_remember"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_account" />
+        app:layout_constraintTop_toBottomOf="@+id/input_id" />
 
     <Button
         android:id="@+id/id_button_register"
@@ -52,13 +54,13 @@
         app:layout_constraintTop_toBottomOf="@+id/id_remember" />
 
     <EditText
-        android:id="@+id/input_account"
+        android:id="@+id/input_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="110dp"
+        android:layout_marginTop="32dp"
         android:ems="10"
-        android:inputType="numberDecimal"
-        android:text="account"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/id_remember"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,12 +68,12 @@
 
     <CheckBox
         android:id="@+id/id_remember"
-        android:layout_width="147dp"
-        android:layout_height="57dp"
+        android:layout_width="144dp"
+        android:layout_height="47dp"
         android:layout_marginTop="40dp"
         android:text="remember me"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.378"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_password" />
+        app:layout_constraintTop_toBottomOf="@id/input_password" />
 </androidx.constraintlayout.widget.ConstraintLayout>
