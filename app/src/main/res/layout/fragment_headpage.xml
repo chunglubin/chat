@@ -8,11 +8,11 @@
 
     <Button
         android:id="@+id/id_homepage"
-        android:layout_width="103dp"
-        android:layout_height="73dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="4dp"
         android:backgroundTint="#DAD2D2"
         android:drawableTop="@drawable/tabhome"
         android:onClick="homeBT"
@@ -26,10 +26,10 @@
 
     <Button
         android:id="@+id/id_person"
-        android:layout_width="109dp"
-        android:layout_height="74dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="4dp"
         android:backgroundTint="#DAD2D2"
         android:drawableTop="@drawable/tabpersonal"
         android:onClick="personBT"
@@ -41,10 +41,10 @@
 
     <Button
         android:id="@+id/id_search"
-        android:layout_width="107dp"
-        android:layout_height="76dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="4dp"
         android:backgroundTint="#DAD2D2"
         android:drawableTop="@drawable/tabsearch"
         android:onClick="searchBT"
@@ -54,4 +54,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/id_person"
         app:layout_constraintStart_toEndOf="@+id/id_homepage" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/id_search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
