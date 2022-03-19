@@ -19,6 +19,7 @@ import java.util.concurrent.TimeUnit
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
 class LogInFragment : Fragment() {
+
     private val TAG=FragmentLoginBinding::class.java.simpleName
     var remember=false
     private var _binding: FragmentLoginBinding? = null
@@ -37,47 +38,7 @@ class LogInFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val client= OkHttpClient.Builder().readTimeout(3, TimeUnit.SECONDS).build()//source來源端
-        val reqeust= Request.Builder().url("wss://lott-dev.lottcube.asia/ws/chat/chat:app_test?nickname=Lubin").build()//destination目的端
-        websocket=client.newWebSocket(reqeust, object : WebSocketListener() {
-            override fun onClosed(webSocket: WebSocket, code: Int, reason: String) {
-                super.onClosed(webSocket, code, reason)
-                Log.d(TAG, ":onClosed")
-            }
 
-            override fun onClosing(webSocket: WebSocket, code: Int, reason: String) {
-                super.onClosing(webSocket, code, reason)
-                Log.d(TAG, ":onClosing")
-            }
-
-            override fun onFailure(webSocket: WebSocket, t: Throwable, response: Response?) {
-                super.onFailure(webSocket, t, response)
-                Log.d(TAG, ":onFailure")
-            }
-
-            override fun onMessage(webSocket: WebSocket, text: String) {
-                super.onMessage(webSocket, text)
-                Log.d(TAG, ":onMessage $text")
-            }
-
-            override fun onMessage(webSocket: WebSocket, bytes: ByteString) {
-                super.onMessage(webSocket, bytes)
-                Log.d(TAG, ":onMessage ${bytes.hex()}")
-            }
-
-            override fun onOpen(webSocket: WebSocket, response: Response) {
-                super.onOpen(webSocket, response)
-                Log.d(TAG, ":onOpen")
-                webSocket.send("Hello, my name is lubinflower.")
-            }
-        })
-        binding.buttonSend.setOnClickListener {
-            val message=binding.sendMessage.text.toString()
-
-            /*val json="{\"action\": \"N\", \"content\": \"$message\"}"
-            websocket.send(json)*/
-            websocket.send(Gson().toJson(MessageSend("N",message)))
-        }
         val pref=requireContext().getSharedPreferences("Login",Context.MODE_PRIVATE)
         val checked=pref.getBoolean("Rem_userid",remember)
         checked.also {
@@ -103,7 +64,7 @@ class LogInFragment : Fragment() {
                         .putInt("Level",2)
                         .apply()
                 }
-                findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+                findNavController().navigate(R.id.action_SecondFragment_to_RoomFragment)
             }else{
                 AlertDialog.Builder(requireContext())//顯示登入錯誤的訊息
                     .setTitle("Login failure")
@@ -112,6 +73,7 @@ class LogInFragment : Fragment() {
                     //.setNeutralButton("Back to the head page",null)
                     .show()
             }
+            //indNavController().navigate(R.id.action_SecondFragment_to_RoomFragment)
         }
         binding.idButtonRegister.setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_SignUpFragment)

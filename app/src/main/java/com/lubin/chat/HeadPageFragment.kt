@@ -17,26 +17,24 @@ import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.lubin.chat.databinding.FragmentHeadpageBinding
 import com.lubin.chatapp.SearchActivity
+import okhttp3.*
+import okio.ByteString
 import java.net.URL
+import java.util.concurrent.TimeUnit
 import kotlin.concurrent.thread
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 class HeadPageFragment : Fragment() {
-    private lateinit var adapter: ChatRoomAdapter
+
     private var _binding: FragmentHeadpageBinding?= null
-    val chatRoom_person= listOf<ChatRoom>(
-        ChatRoom("20220321","apple","welcome"),
-        ChatRoom("20220321","banana","welcome"),
-        ChatRoom("20220321","cherry","welcome"),
-        ChatRoom("20220321","orange","welcome"),
-    )
-    val rooms= mutableListOf<Lightyear>()
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    private val TAG=FragmentHeadpageBinding::class.java.simpleName
+    //lateinit var websocket:WebSocket
+    //private val TAG=FragmentHeadpageBinding::class.java.simpleName
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,7 +46,40 @@ class HeadPageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        /*val client= OkHttpClient.Builder().readTimeout(3, TimeUnit.SECONDS).build()//source來源端
+        val reqeust= Request.Builder().url("wss://lott-dev.lottcube.asia/ws/chat/chat:app_test?nickname=Lubin").build()//destination目的端
+        websocket=client.newWebSocket(reqeust, object : WebSocketListener() {
+            override fun onClosed(webSocket: WebSocket, code: Int, reason: String) {
+                super.onClosed(webSocket, code, reason)
+                Log.d(TAG, ":onClosed")
+            }
 
+            override fun onClosing(webSocket: WebSocket, code: Int, reason: String) {
+                super.onClosing(webSocket, code, reason)
+                Log.d(TAG, ":onClosing")
+            }
+
+            override fun onFailure(webSocket: WebSocket, t: Throwable, response: Response?) {
+                super.onFailure(webSocket, t, response)
+                Log.d(TAG, ":onFailure")
+            }
+
+            override fun onMessage(webSocket: WebSocket, text: String) {
+                super.onMessage(webSocket, text)
+                Log.d(TAG, ":onMessage $text")
+            }
+
+            override fun onMessage(webSocket: WebSocket, bytes: ByteString) {
+                super.onMessage(webSocket, bytes)
+                Log.d(TAG, ":onMessage ${bytes.hex()}")
+            }
+
+            override fun onOpen(webSocket: WebSocket, response: Response) {
+                super.onOpen(webSocket, response)
+                Log.d(TAG, ":onOpen")
+                webSocket.send("Hello, my name is lubinflower.")
+            }
+        })
         binding.idSearch.setOnClickListener {
             val intent=Intent(context,SearchActivity::class.java)
             startActivity(intent)
@@ -60,7 +91,8 @@ class HeadPageFragment : Fragment() {
         binding.recycler.layoutManager=GridLayoutManager(requireContext(),2)
         adapter=ChatRoomAdapter()
         binding.recycler.adapter=adapter
-        thread {
+        */
+        /*thread {
             val json=URL("https://api.jsonserve.com/XEY0wX").readText()
             val msg=Gson().fromJson(json,default_message::class.java)
             Log.d(TAG, "msg:${msg.body.text}");//test msg
@@ -74,10 +106,12 @@ class HeadPageFragment : Fragment() {
             activity?.runOnUiThread {
                 adapter.notifyDataSetChanged()
             }
+        }*/
+        binding.idPerson.setOnClickListener {
+            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
-
     }
-    inner class ChatRoomAdapter:RecyclerView.Adapter<ChatRoomViewHolder>(){
+    /*inner class ChatRoomAdapter:RecyclerView.Adapter<ChatRoomViewHolder>(){
         val rooms= mutableListOf<Lightyear>()
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatRoomViewHolder {
             val view=layoutInflater.inflate(R.layout.row_chatroom,parent,false)
@@ -94,14 +128,14 @@ class HeadPageFragment : Fragment() {
         }
 
         override fun getItemCount(): Int {
-            return chatRoom_person.size
+            return rooms.size//回傳陣列長度
         }
     }
-    inner class ChatRoomViewHolder(view: View):RecyclerView.ViewHolder(view){
+    inner class ChatRoomViewHolder(view: View):RecyclerView.ViewHolder(view){//recycler回收的人
         val room_host=view.findViewById<TextView>(R.id.id_hostname)
         val room_title=view.findViewById<TextView>(R.id.id_chatroom_title)
         val streamer_headphoto=view.findViewById<ImageView>(R.id.streamer_photo)
-    }
+    }*/
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

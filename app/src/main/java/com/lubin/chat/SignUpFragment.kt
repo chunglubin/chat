@@ -34,14 +34,13 @@ class SignUpFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.idBack.setOnClickListener {
-            findNavController().navigate(R.id.action_SignUpFragment_to_FirstFragment)
+
+        binding.idSubmit.setOnClickListener {
+            val id_update=binding.editUserid.text.toString()
+            val password_update=binding.editPassword.text.toString()
+            if(id_update=="lubinflower"&&password_update=="20220321"){
+                findNavController().navigate(R.id.action_SignUpFragment_to_RoomFragment)
+            }
         }
     }
-    fun setPictureBT(view: View){
-
-    }
-    fun submitBT(view: View){
-    }
-
 }
