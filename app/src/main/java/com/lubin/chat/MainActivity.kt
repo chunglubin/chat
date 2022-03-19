@@ -13,10 +13,10 @@ import android.view.MenuItem
 import com.lubin.chat.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-
+    lateinit var binding: ActivityMainBinding
     private val TAG= MainActivity::class.java.simpleName
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var binding: ActivityMainBinding
+    //private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
